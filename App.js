@@ -5,6 +5,7 @@ import {createStore, combineReducers} from "redux";
 import {Provider} from "react-redux";
 import {composeWithDevTools} from "redux-devtools-extension/index";
 import productsReducer from "./redux/reducers/products.reducers";
+import ShopNavigator from "./navigation/ShopNavigator";
 
 enableScreens();
 
@@ -17,9 +18,7 @@ const store = createStore(rootReducer, composeWithDevTools());
 export default function App() {
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <ShopNavigator/>
     </Provider>
   );
 }

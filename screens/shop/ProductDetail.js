@@ -1,26 +1,51 @@
 import React from 'react';
 import {useSelector} from "react-redux";
 import {StyleSheet, View, Text, Button, Image, ScrollView} from 'react-native';
+import Colors from "../../theme/constants";
 
 const ProductDetailScreen = props => {
   const prodId = props.navigation.getParam('productId');
   const selectedProduct = useSelector(
     state => state.products.availableProducts.find(prod => prod.id === prodId)
   );
+  const {imageUrl, price, description} = selectedProduct;
 
   return (
-    <View>
-      <Text>{selectedProduct.title}</Text>
-    </View>
+    <ScrollView>
+      <Image style={styles.image} source={{uri: imageUrl}}/>
+      <View style={styles.actions}>
+        <Button
+          title='Add To Cart'
+          color={Colors.primary}
+          onPress={() => {}}
+        />
+      </View>
+      <Text style={styles.price}>£{price}</Text>
+      <Text style={styles.description}>{description}</Text>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
+  image: {
+    width: '100%',
+    height: 300,
+  },
+  actions: {
+    marginVertical: 10,
     alignItems: 'center',
-    justifyContent: 'center',
-  }
+  },
+  price: {
+    fontSize: 20,
+    color: Colors.darkGrey,
+    textAlign: 'center',
+    marginVertical: 20,
+  },
+  description: {
+    fontSize: 14,
+    textAlign: 'center',
+    marginHorizontal: 20,
+  },
 });
 
 export default ProductDetailScreen;

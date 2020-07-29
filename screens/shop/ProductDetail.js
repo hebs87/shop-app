@@ -36,12 +36,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   price: {
+    fontFamily: 'OpenSansBold',
     fontSize: 20,
     color: Colors.darkGrey,
     textAlign: 'center',
     marginVertical: 20,
   },
   description: {
+    fontFamily: 'OpenSans',
     fontSize: 14,
     textAlign: 'center',
     marginHorizontal: 20,

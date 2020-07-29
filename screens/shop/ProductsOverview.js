@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {StyleSheet, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 import ProductItem from "../../components/shop/ProductItem";
 
 const ProductOverviewScreen = props => {
@@ -22,13 +22,5 @@ const ProductOverviewScreen = props => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
 
 export default ProductOverviewScreen;

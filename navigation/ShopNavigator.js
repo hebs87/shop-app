@@ -9,6 +9,9 @@ const ProductsNavigator = createStackNavigator(
   {
     ProductsOverview: {
       screen: ProductOverviewScreen,
+      navigationOptions: {
+        headerTitle: 'All Products',
+      },
     },
   },
   {

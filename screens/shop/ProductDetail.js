@@ -1,10 +1,16 @@
 import React from 'react';
+import {useSelector} from "react-redux";
 import {StyleSheet, View, Text, Button, Image, ScrollView} from 'react-native';
 
 const ProductDetailScreen = props => {
+  const prodId = props.navigation.getParam('productId');
+  const selectedProduct = useSelector(
+    state => state.products.availableProducts.find(prod => prod.id === prodId)
+  );
+
   return (
     <View>
-      <Text>Product Detail Screen!</Text>
+      <Text>{selectedProduct.title}</Text>
     </View>
   );
 };

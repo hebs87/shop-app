@@ -3,14 +3,26 @@ import {Platform} from 'react-native';
 import {createAppContainer} from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack";
 import ProductOverviewScreen from "../screens/shop/ProductsOverview";
+import ProductDetailScreen from "../screens/shop/ProductDetail";
 import Colors from '../theme/constants';
 
 const ProductsNavigator = createStackNavigator(
   {
     ProductsOverview: {
       screen: ProductOverviewScreen,
-      navigationOptions: {
-        headerTitle: 'All Products',
+      navigationOptions: () => {
+        return {
+          headerTitle: 'All Products',
+        };
+      },
+    },
+    ProductDetail: {
+      screen: ProductDetailScreen,
+      navigationOptions: navData => {
+        const title = navData.navigation.getParam('title');
+        return {
+          headerTitle: title,
+        };
       },
     },
   },

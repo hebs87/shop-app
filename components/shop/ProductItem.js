@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, Image, Button} from 'react-native';
 import Colors from "../../theme/constants";
 
 const ProductItem = props => {
-  const {} = props;
+  const {imageUrl, title, price, onViewDetail, onAddToCart} = props;
 
   return (
     <View style={styles.product}>

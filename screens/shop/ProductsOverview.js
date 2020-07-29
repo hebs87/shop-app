@@ -8,6 +8,20 @@ const ProductOverviewScreen = props => {
   const products = useSelector(state => state.products.availableProducts);
   const dispatch = useDispatch();
 
+  const handleViewDetail = itemData => {
+    props.navigation.navigate(
+      'ProductDetail',
+      {
+        productId: itemData.item.id,
+        title: itemData.item.title,
+      }
+    )
+  };
+
+  const handleAddToCart = item => {
+    dispatch(cartActions.addToCart(item));
+  };
+
   return (
     <FlatList
       keyExtractor={item => item.id}
@@ -17,16 +31,8 @@ const ProductOverviewScreen = props => {
           imageUrl={itemData.item.imageUrl}
           title={itemData.item.title}
           price={itemData.item.price}
-          onViewDetail={() => {
-            props.navigation.navigate(
-              'ProductDetail',
-              {
-                productId: itemData.item.id,
-                title: itemData.item.title,
-              }
-            )
-          }}
-          onAddToCart={() => dispatch(cartActions.addToCart(itemData.item))}
+          onViewDetail={() => handleViewDetail(itemData)}
+          onAddToCart={() => handleAddToCart(itemData.item)}
         />
       )}
     />

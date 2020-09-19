@@ -3,9 +3,10 @@ import {Platform} from 'react-native';
 import {createAppContainer} from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import CustomHeaderButton from "../components/UI/HeaderButton";
 import ProductOverviewScreen from "../screens/shop/ProductsOverview";
 import ProductDetailScreen from "../screens/shop/ProductDetail";
-import CustomHeaderButton from "../components/UI/HeaderButton";
+import CartScreen from "../screens/shop/Cart";
 import Colors from '../theme/constants';
 
 const ProductsNavigator = createStackNavigator(
@@ -29,10 +30,18 @@ const ProductsNavigator = createStackNavigator(
               <Item
                 title="Cart"
                 iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-                onPress={() => {}}
+                onPress={() => navData.navigation.navigate('Cart')}
               />
             </HeaderButtons>
-          )
+          ),
+        };
+      },
+    },
+    Cart: {
+      screen: CartScreen,
+      navigationOptions: navData => {
+        return {
+          headerTitle: 'Cart'
         };
       },
     },

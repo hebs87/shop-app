@@ -9,13 +9,28 @@ import ProductDetailScreen from "../screens/shop/ProductDetail";
 import CartScreen from "../screens/shop/Cart";
 import Colors from '../theme/constants';
 
+const renderCartButton = navData => {
+  return (
+    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+      <Item
+        title="Cart"
+        iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+        onPress={() => navData.navigation.navigate('Cart')}
+      />
+    </HeaderButtons>
+  )
+}
+
 const ProductsNavigator = createStackNavigator(
   {
     ProductsOverview: {
       screen: ProductOverviewScreen,
-      navigationOptions: () => {
+      navigationOptions: navData => {
         return {
           headerTitle: 'All Products',
+          headerRight: () => (
+            renderCartButton(navData)
+          ),
         };
       },
     },
@@ -26,13 +41,7 @@ const ProductsNavigator = createStackNavigator(
         return {
           headerTitle: title,
           headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-              <Item
-                title="Cart"
-                iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-                onPress={() => navData.navigation.navigate('Cart')}
-              />
-            </HeaderButtons>
+            renderCartButton(navData)
           ),
         };
       },

@@ -4,23 +4,24 @@ import {Ionicons} from "@expo/vector-icons";
 import Colors from "../../theme/constants"
 
 const CartItem = props => {
+  const {quantity, title, amount, handleRemove} = props;
+
   return (
     <View style={styles.cartItem}>
       <View style={styles.itemData}>
         <Text style={styles.quantity}>
-          QTY
+          {quantity} x{' '}
         </Text>
-        {' '}
         <Text style={styles.mainText}>
-          TITLE
+          {title}
         </Text>
       </View>
       <View style={styles.itemData}>
         <Text style={styles.mainText}>
-          £AMT
+          £{amount}
         </Text>
         <TouchableOpacity
-          onPress={props.handleRemove}
+          onPress={handleRemove}
           style={styles.deleteButton}
         >
           <Ionicons

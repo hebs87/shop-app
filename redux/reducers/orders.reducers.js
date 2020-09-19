@@ -2,11 +2,11 @@ const initialState = {
   orders: [],
 }
 
-const orderReducer = (state=initialState, action) => {
+const ordersReducer = (state=initialState, action) => {
   switch (action.type) {
     default:
       return state;
   }
 }
 
-export default orderReducer;
+export default ordersReducer;

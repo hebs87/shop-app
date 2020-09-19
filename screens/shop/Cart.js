@@ -5,15 +5,34 @@ import Colors from "../../theme/constants";
 
 const CartScreen = props => {
   const cartTotalAmount = useSelector(state => state.cart.totalAmount);
+  const cartItems = useSelector(state => {
+    // We need to set a productId, so we create a new array of product objects with the required values from the store
+    const transformedCartItems = [];
+    const items = state.cart.items;
+
+    for (const key in items) {
+      transformedCartItems.push({
+        productId: key,
+        productTitle: items[key].productTitle,
+        productPrice: items[key].productPrice,
+        quantity: items[key].quantity,
+        sum: items[key].sum
+      });
+    }
+
+    return transformedCartItems;
+  });
 
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
-          Total: <Text style={styles.amount}>£{cartTotalAmount}</Text>
+          Total: <Text style={styles.amount}>£{cartTotalAmount.toFixed(2)}</Text>
         </Text>
         <Button
           title="Order Now"
+          color={Colors.accent}
+          disabled={cartItems.length === 0}
         />
       </View>
       <View>
@@ -46,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   amount: {
-    color: Colors.accent,
+    color: Colors.primary,
   },
 })
 

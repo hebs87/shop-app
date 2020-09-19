@@ -51,7 +51,7 @@ const cartReducer = (state=initialState, action) => {
       } else {
         // Remove item from list
         updatedCartItems = {...state.items};
-        delete cartItems[productId];
+        delete updatedCartItems[productId];
       }
       return {
         ...state,

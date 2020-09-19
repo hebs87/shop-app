@@ -18,7 +18,7 @@ const CartItem = props => {
       </View>
       <View style={styles.itemData}>
         <Text style={styles.mainText}>
-          £{amount}
+          £{amount.toFixed(2)}
         </Text>
         <TouchableOpacity
           onPress={handleRemove}

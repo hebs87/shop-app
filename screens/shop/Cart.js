@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, FlatList, Button} from "react-native";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {removeFromCart} from "../../redux/actions/cart.actions";
 import CartItem from "../../components/shop/CartItem";
 import Colors from "../../theme/constants";
 
@@ -20,9 +21,17 @@ const CartScreen = props => {
         sum: items[key].sum
       });
     }
-
-    return transformedCartItems;
+    // Return the array of products and sort them to ensure the displayed order doesn't change when removing items
+    return transformedCartItems.sort((a, b) =>
+      a.productId > b.productId ? 1 : -1
+    );
   });
+
+  const dispatch = useDispatch();
+
+  const handleRemove = productId => {
+    return dispatch(removeFromCart(productId));
+  }
 
   return (
     <View style={styles.screen}>
@@ -44,7 +53,7 @@ const CartScreen = props => {
             quantity={itemData.item.quantity}
             title={itemData.item.productTitle}
             amount={itemData.item.sum}
-            handleRemove={() => {}}
+            handleRemove={() => handleRemove(itemData.item.productId)}
           />
         )}
       />

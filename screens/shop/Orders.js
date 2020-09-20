@@ -10,10 +10,10 @@ const OrdersScreen = props => {
     <FlatList
       keyExtractor={item => item.id}
       data={orders}
-      renderItem={itemData => (
+      renderItem={({item}) => (
         <OrderItem
-          amount={itemData.item.totalAmount}
-          date={itemData.item.readableDate}
+          amount={item.totalAmount}
+          date={item.readableDate}
         />
       )}
     />

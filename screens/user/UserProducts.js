@@ -12,7 +12,7 @@ const UserProductsScreen = props => {
       data={products}
       renderItem={({item}) => (
         <ProductItem
-          image={item.imageUrl}
+          imageUrl={item.imageUrl}
           title={item.title}
           price={item.price}
           onViewDetail={() => {}}

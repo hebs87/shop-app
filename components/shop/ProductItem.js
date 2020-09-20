@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, Image, Button, TouchableOpacity, TouchableNative
 import Colors from "../../theme/constants";
 
 const ProductItem = props => {
-  const {imageUrl, title, price, onViewDetail, onAddToCart} = props;
+  const {imageUrl, title, price, onSelect, children} = props;
   let TouchableComponent = TouchableOpacity;
   if (Platform.OS === 'android' && Platform.Version >= 21) {
     TouchableComponent = TouchableNativeFeedback;
@@ -12,7 +12,7 @@ const ProductItem = props => {
   return (
     <View style={styles.product}>
       <View style={styles.touchable}>
-        <TouchableComponent onPress={onViewDetail} useForeground>
+        <TouchableComponent onPress={onSelect} useForeground>
           <View>
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={{uri: imageUrl}}/>
@@ -22,16 +22,7 @@ const ProductItem = props => {
               <Text style={styles.price}>£{price.toFixed(2)}</Text>
             </View>
             <View style={styles.actions}>
-              <Button
-                title='View Details'
-                color={Colors.primary}
-                onPress={onViewDetail}
-              />
-              <Button
-                title='To Cart'
-                color={Colors.primary}
-                onPress={onAddToCart}
-              />
+              {children}
             </View>
           </View>
         </TouchableComponent>

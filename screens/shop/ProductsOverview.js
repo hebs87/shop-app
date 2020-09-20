@@ -1,8 +1,9 @@
 import React from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {FlatList} from 'react-native';
+import {FlatList, Button, View} from 'react-native';
 import ProductItem from "../../components/shop/ProductItem";
 import * as cartActions from '../../redux/actions/cart.actions';
+import Colors from "../../theme/constants";
 
 const ProductOverviewScreen = props => {
   const products = useSelector(state => state.products.availableProducts);
@@ -31,9 +32,19 @@ const ProductOverviewScreen = props => {
           imageUrl={item.imageUrl}
           title={item.title}
           price={item.price}
-          onViewDetail={() => handleViewDetail(item)}
-          onAddToCart={() => handleAddToCart(item)}
-        />
+          onSelect={() => handleViewDetail(item)}
+        >
+          <Button
+            title='View Details'
+            color={Colors.primary}
+            onPress={() => handleViewDetail(item)}
+          />
+          <Button
+            title='To Cart'
+            color={Colors.primary}
+            onPress={() => handleAddToCart(item)}
+          />
+        </ProductItem>
       )}
     />
   );

@@ -59,6 +59,7 @@ const CartScreen = props => {
             quantity={item.quantity}
             title={item.productTitle}
             amount={item.sum}
+            deletable
             handleRemove={() => handleRemove(item.productId)}
           />
         )}

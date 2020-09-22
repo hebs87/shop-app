@@ -23,7 +23,7 @@ const renderCartButton = navData => {
         onPress={() => navData.navigation.navigate('Cart')}
       />
     </HeaderButtons>
-  )
+  );
 };
 
 const renderMenuButton = navData => {
@@ -35,7 +35,19 @@ const renderMenuButton = navData => {
         onPress={() => navData.navigation.toggleDrawer()}
       />
     </HeaderButtons>
-  )
+  );
+};
+
+const renderAddProductButton = navData => {
+  return (
+    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+      <Item
+        title="Add"
+        iconName={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+        onPress={() => navData.navigation.navigate('EditProduct')}
+      />
+    </HeaderButtons>
+  );
 };
 
 const defaultNavOptions = {
@@ -141,6 +153,9 @@ const AdminNavigator = createStackNavigator(
           headerLeft: () => (
             renderMenuButton(navData)
           ),
+          headerRight: () => (
+            renderAddProductButton(navData)
+          ),
         };
       },
     },
@@ -149,7 +164,7 @@ const AdminNavigator = createStackNavigator(
       navigationOptions: navData => {
         const title = navData.navigation.getParam('title');
         return {
-          headerTitle: `Edit: ${title}`,
+          headerTitle: title ? `Edit: ${title}` : 'Add Product',
         };
       },
     },

@@ -11,6 +11,7 @@ import ProductDetailScreen from "../screens/shop/ProductDetail";
 import CartScreen from "../screens/shop/Cart";
 import OrdersScreen from "../screens/shop/Orders";
 import UserProductsScreen from "../screens/user/UserProducts";
+import EditProductScreen from "../screens/user/EditProduct";
 import Colors from '../theme/constants';
 
 const renderCartButton = navData => {
@@ -140,6 +141,14 @@ const AdminNavigator = createStackNavigator(
           headerLeft: () => (
             renderMenuButton(navData)
           ),
+        };
+      },
+    },
+    EditProduct: {
+      screen: EditProductScreen,
+      navigationOptions: navData => {
+        return {
+          headerTitle: 'Your Products',
         };
       },
     },

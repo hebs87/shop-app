@@ -9,6 +9,16 @@ const UserProductsScreen = props => {
   const products = useSelector(state => state.products.userProducts);
   const dispatch = useDispatch();
 
+  const handleEdit = item => {
+    props.navigation.navigate(
+      'EditProduct',
+      {
+        productId: item.id,
+        title: item.title,
+      }
+    );
+  };
+
   const handleDelete = productId => {
     return dispatch(deleteProduct(productId));
   };
@@ -22,12 +32,12 @@ const UserProductsScreen = props => {
           imageUrl={item.imageUrl}
           title={item.title}
           price={item.price}
-          onSelect={() => {}}
+          onSelect={() => handleEdit(item)}
         >
           <Button
             title='Edit'
             color={Colors.primary}
-            onPress={() => {}}
+            onPress={() => handleEdit(item)}
           />
           <Button
             title='Delete'

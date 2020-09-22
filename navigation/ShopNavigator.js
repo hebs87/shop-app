@@ -147,8 +147,9 @@ const AdminNavigator = createStackNavigator(
     EditProduct: {
       screen: EditProductScreen,
       navigationOptions: navData => {
+        const title = navData.navigation.getParam('title');
         return {
-          headerTitle: 'Your Products',
+          headerTitle: `Edit: ${title}`,
         };
       },
     },

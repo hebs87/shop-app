@@ -31,7 +31,7 @@ const EditProductScreen = props => {
       dispatch(createProduct(formData));
     }
 
-    props.navigation.navigate('UserProducts')
+    props.navigation.goBack();
   }, [dispatch, prodId, title, imageUrl, price, description]);
 
   useEffect(() => {

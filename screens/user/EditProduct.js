@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import {useSelector} from "react-redux";
 import {StyleSheet, ScrollView, View, TextInput, Text} from "react-native";
 import Colors from '../../theme/constants';
@@ -13,6 +13,21 @@ const EditProductScreen = props => {
   const [imageUrl, setImageUrl] = useState(product ? product.imageUrl : '');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState(product ? product.description : '');
+
+  const handleSave = useCallback(() => {
+    const form = {
+      id: product ? product.id : null,
+      title,
+      imageUrl,
+      description,
+      price: product ? product.price : price
+    };
+    console.log(form);
+  }, []);
+
+  useEffect(() => {
+    props.navigation.setParams({handleSave})
+  }, [handleSave]);
 
   return (
     <ScrollView>

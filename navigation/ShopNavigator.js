@@ -51,12 +51,14 @@ const renderAddProductButton = navData => {
 };
 
 const renderSaveButton = navData => {
+  const handleSave = navData.navigation.getParam('handleSave')
+
   return (
     <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
       <Item
         title="Save"
         iconName={Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'}
-        onPress={() => {}}
+        onPress={handleSave}
       />
     </HeaderButtons>
   );

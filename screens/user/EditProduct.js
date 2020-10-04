@@ -1,26 +1,56 @@
-import React from "react";
+import React, {useState} from "react";
+import {useSelector} from "react-redux";
 import {StyleSheet, ScrollView, View, TextInput, Text} from "react-native";
 import Colors from '../../theme/constants';
 
 const EditProductScreen = props => {
+  // Get product if there is one - if user is editing
+  const prodId = props.navigation.getParam('productId');
+  const product = useSelector(state => state.products.userProducts.find(prod => prod.id === prodId));
+
+  // Set state to product details if editing product
+  const [title, setTitle] = useState(product ? product.title : '');
+  const [imageUrl, setImageUrl] = useState(product ? product.imageUrl : '');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState(product ? product.description : '');
+
   return (
     <ScrollView>
       <View style={styles.form}>
         <View style={styles.formControl}>
           <Text style={styles.label}>Title</Text>
-          <TextInput style={styles.input}/>
+          <TextInput
+            style={styles.input}
+            value={title}
+            onChange={text => setTitle(text)}
+          />
         </View>
         <View style={styles.formControl}>
           <Text style={styles.label}>Image URL</Text>
-          <TextInput style={styles.input}/>
+          <TextInput
+            style={styles.input}
+            value={imageUrl}
+            onChange={text => setImageUrl(text)}
+          />
         </View>
-        <View style={styles.formControl}>
-          <Text style={styles.label}>Price</Text>
-          <TextInput style={styles.input}/>
-        </View>
+        {
+          !product &&
+          <View style={styles.formControl}>
+            <Text style={styles.label}>Price</Text>
+            <TextInput
+              style={styles.input}
+              value={price}
+              onChange={text => setPrice(text)}
+            />
+          </View>
+        }
         <View style={styles.formControl}>
           <Text style={styles.label}>Description</Text>
-          <TextInput style={styles.input}/>
+          <TextInput
+            style={styles.input}
+            value={description}
+            onChange={text => setDescription(text)}
+          />
         </View>
       </View>
     </ScrollView>

@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useCallback} from "react";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {StyleSheet, ScrollView, View, TextInput, Text} from "react-native";
+import {createProduct, updateProduct} from "../../redux/actions/products.actions";
 import Colors from '../../theme/constants';
 
 const EditProductScreen = props => {
   // Get product if there is one - if user is editing
   const prodId = props.navigation.getParam('productId');
   const product = useSelector(state => state.products.userProducts.find(prod => prod.id === prodId));
+  const dispatch = useDispatch();
 
   // Set state to product details if editing product
   const [title, setTitle] = useState(product ? product.title : '');
@@ -15,15 +17,22 @@ const EditProductScreen = props => {
   const [description, setDescription] = useState(product ? product.description : '');
 
   const handleSave = useCallback(() => {
-    const form = {
+    const formData = {
       id: product ? product.id : null,
       title,
       imageUrl,
       description,
-      price: product ? product.price : price
+      price: product ? product.price : +price
     };
-    console.log(form);
-  }, []);
+
+    if (product) {
+      dispatch(updateProduct(formData));
+    } else {
+      dispatch(createProduct(formData));
+    }
+
+    props.navigation.navigate('UserProducts')
+  }, [dispatch, prodId, title, imageUrl, price, description]);
 
   useEffect(() => {
     props.navigation.setParams({handleSave})
@@ -37,7 +46,7 @@ const EditProductScreen = props => {
           <TextInput
             style={styles.input}
             value={title}
-            onChange={text => setTitle(text)}
+            onChangeText={text => setTitle(text)}
           />
         </View>
         <View style={styles.formControl}>
@@ -45,7 +54,7 @@ const EditProductScreen = props => {
           <TextInput
             style={styles.input}
             value={imageUrl}
-            onChange={text => setImageUrl(text)}
+            onChangeText={text => setImageUrl(text)}
           />
         </View>
         {
@@ -55,7 +64,7 @@ const EditProductScreen = props => {
             <TextInput
               style={styles.input}
               value={price}
-              onChange={text => setPrice(text)}
+              onChangeText={text => setPrice(text)}
             />
           </View>
         }
@@ -64,7 +73,7 @@ const EditProductScreen = props => {
           <TextInput
             style={styles.input}
             value={description}
-            onChange={text => setDescription(text)}
+            onChangeText={text => setDescription(text)}
           />
         </View>
       </View>

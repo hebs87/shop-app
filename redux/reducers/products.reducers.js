@@ -30,7 +30,6 @@ const productsReducer = (state=initialState, action) => {
       }
     case UPDATE_PRODUCT:
       const productData = action.payload;
-      console.log(productData)
       // Get the product index in userProducts, create an updated product and update the userProducts array
       const productIndex = state.userProducts.findIndex(prod => prod.id === productData.id);
       const updatedProduct = new Product(

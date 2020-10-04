@@ -50,6 +50,18 @@ const renderAddProductButton = navData => {
   );
 };
 
+const renderSaveButton = navData => {
+  return (
+    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+      <Item
+        title="Save"
+        iconName={Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'}
+        onPress={() => {}}
+      />
+    </HeaderButtons>
+  );
+};
+
 const defaultNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === 'android' ? Colors.primary : '',
@@ -165,6 +177,9 @@ const AdminNavigator = createStackNavigator(
         const title = navData.navigation.getParam('title');
         return {
           headerTitle: title ? `Edit: ${title}` : 'Add Product',
+          headerRight: () => (
+            renderSaveButton(navData)
+          )
         };
       },
     },

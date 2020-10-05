@@ -21,3 +21,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
 });
+
+export default Card;
